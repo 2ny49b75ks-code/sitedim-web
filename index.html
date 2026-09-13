@@ -132,9 +132,26 @@
   .feat-block { margin-bottom: 80px; }
   .feat-block .stripe-bar { margin: 0 0 60px; }
 
-  section.download { padding: 70px 0; text-align: center; background: var(--navy-2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-  section.download h2.big-title { text-align: center; }
-  section.download p.lead { max-width: 560px; margin: 0 auto 30px; color: var(--muted); }
+  section.download { padding: 80px 0 90px; background: var(--navy-2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  section.download p.lead { max-width: 560px; color: var(--muted); font-size: 1.05em; margin: 0 0 30px; }
+
+  .download-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: start; margin-top: 60px; }
+  @media (max-width: 780px) { .download-grid { grid-template-columns: 1fr; } }
+
+  .req-grid { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--border); border-radius: 14px; overflow: hidden; margin-bottom: 22px; }
+  .req-cell { padding: 20px 24px; border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .req-cell:nth-child(2n) { border-right: none; }
+  .req-cell:nth-child(3), .req-cell:nth-child(4) { border-bottom: none; }
+  .req-cell .label { font-family: 'IBM Plex Mono', monospace; color: var(--muted); font-size: 0.78em; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 6px; }
+  .req-cell .value { font-family: 'IBM Plex Mono', monospace; color: var(--orange); font-size: 1.2em; font-weight: 600; }
+  .req-note { color: var(--muted); font-size: 0.95em; }
+
+  .tech-card { background: var(--navy-3); border-radius: 14px; padding: 32px; }
+  .tech-row { padding: 16px 0; border-top: 1px solid var(--border); display: flex; gap: 12px; }
+  .tech-row:first-of-type { border-top: none; padding-top: 0; }
+  .tech-row .dash { color: var(--orange); font-weight: 700; }
+  .tech-row h4 { margin: 0 0 4px; font-size: 1em; font-weight: 600; }
+  .tech-row p { margin: 0; color: var(--muted); font-size: 0.95em; }
 
   section.contact { padding: 70px 0; }
   section.contact .lead { max-width: 560px; color: var(--muted); font-size: 1.05em; margin: 0 0 50px; }
@@ -391,10 +408,34 @@
 
 <section class="download" id="telecharger">
   <div class="wrap">
-    <p class="eyebrow" style="justify-content:center;"><span class="rule"></span> TÉLÉCHARGER</p>
-    <h2 class="big-title">Prêt à relever votre prochain chantier?</h2>
-    <p class="lead">Disponible sur l'App Store pour iPhone et iPad équipés LiDAR, iOS 17 et plus.</p>
-    <a class="btn-primary" href="https://apps.apple.com/app/site-dim/id6807966608">Télécharger SITE DIM</a>
+    <p class="eyebrow"><span class="rule"></span> TÉLÉCHARGER</p>
+    <h2 class="big-title">SITE DIM sur l'App Store</h2>
+    <p class="lead">Une application iOS native, conçue pour être utilisée directement sur le chantier.</p>
+    <a class="btn-primary" href="https://apps.apple.com/app/site-dim/id6807966608">Télécharger sur l'App Store</a>
+  </div>
+  <div class="stripe-bar" style="margin-top:60px;"></div>
+  <div class="wrap">
+    <div class="download-grid">
+      <div>
+        <p class="eyebrow"><span class="rule"></span> CONFIGURATION REQUISE</p>
+        <h2 class="big-title" style="font-size:1.9em;">Vérifiez la compatibilité de votre appareil</h2>
+        <div class="req-grid">
+          <div class="req-cell"><div class="label">Système</div><div class="value mono">iOS 17+</div></div>
+          <div class="req-cell"><div class="label">Capteur</div><div class="value mono">LiDAR requis</div></div>
+          <div class="req-cell"><div class="label">Appareils</div><div class="value mono">iPhone / iPad</div></div>
+          <div class="req-cell"><div class="label">Prix</div><div class="value mono">44,99 $ CAD</div></div>
+        </div>
+        <p class="req-note">SITE DIM nécessite un iPhone ou iPad équipé d'un capteur LiDAR pour fonctionner. Le capteur LiDAR permet à l'application de mesurer les distances réelles dans l'espace capté par la caméra.</p>
+      </div>
+      <div class="tech-card">
+        <p class="eyebrow"><span class="rule"></span> FICHE TECHNIQUE</p>
+        <h2 class="big-title" style="font-size:1.5em; margin-bottom:18px;">Informations sur l'app</h2>
+        <div class="tech-row"><span class="dash">—</span><div><h4>Éditeur</h4><p>JDG inc., Québec, Canada</p></div></div>
+        <div class="tech-row"><span class="dash">—</span><div><h4>Identifiant</h4><p class="mono">JDG-inc.SiteDim</p></div></div>
+        <div class="tech-row"><span class="dash">—</span><div><h4>Langues</h4><p>Français, anglais</p></div></div>
+        <div class="tech-row"><span class="dash">—</span><div><h4>Exports</h4><p>PDF pleine page, DXF vectoriel</p></div></div>
+      </div>
+    </div>
   </div>
 </section>
 
