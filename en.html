@@ -5,227 +5,448 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="SITE DIM turns your iPhone into an augmented-reality construction takeoff tool: walls, floors, ceilings, roofs, trim and terrain — with automatic area and volume calculations.">
 <title>SITE DIM — Augmented Reality Quantity Takeoff</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=IBM+Plex+Mono:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --navy: #14203a;
+    --navy: #0d1526;
+    --navy-2: #141f38;
+    --navy-3: #1b2947;
     --orange: #f97316;
-    --bg: #fff;
-    --muted: #5b6478;
-    --card-bg: #f7f8fb;
-    --border: #e6e8ee;
+    --text: #eef1f8;
+    --muted: #94a0bd;
+    --border: #263256;
   }
   * { box-sizing: border-box; }
   body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    max-width: 880px;
-    margin: 0 auto;
-    padding: 0 20px 60px;
-    line-height: 1.6;
-    color: var(--navy);
-    background: var(--bg);
-  }
-  header.top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 0;
-    border-bottom: 1px solid var(--border);
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-  .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 1.2em; }
-  .brand .ruler { display: inline-block; width: 26px; height: 14px; border: 2px solid var(--orange); border-radius: 4px; position: relative; }
-  nav.top-nav a { color: var(--muted); text-decoration: none; font-weight: 600; margin-left: 18px; font-size: 0.95em; }
-  nav.top-nav a:hover { color: var(--orange); }
-  .lang-switch a { color: var(--orange); font-weight: 700; }
-
-  .hero { padding: 56px 0 40px; text-align: center; }
-  .hero h1 { font-size: 2.4em; margin-bottom: 8px; letter-spacing: -0.5px; }
-  .hero .slogan { color: var(--muted); font-size: 1.2em; margin-bottom: 28px; }
-  .hero p.lead { max-width: 620px; margin: 0 auto 32px; font-size: 1.08em; }
-  .cta {
-    display: inline-block;
-    background: var(--orange);
-    color: #fff;
-    font-weight: 700;
-    text-decoration: none;
-    padding: 14px 28px;
-    border-radius: 10px;
-    font-size: 1.05em;
-  }
-  .cta:hover { opacity: 0.92; }
-
-  h2.section-title { font-size: 1.6em; margin-top: 64px; margin-bottom: 8px; }
-  p.section-sub { color: var(--muted); margin-top: 0; margin-bottom: 28px; }
-
-  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
-  .card {
-    background: var(--card-bg);
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 20px;
-  }
-  .card .icon { font-size: 1.6em; margin-bottom: 8px; display: block; }
-  .card h3 { margin: 0 0 6px; font-size: 1.05em; }
-  .card p { margin: 0; color: var(--muted); font-size: 0.95em; }
-
-  .precision-list { padding-left: 20px; }
-  .precision-list li { margin-bottom: 10px; }
-
-  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
-  @media (max-width: 640px) { .two-col { grid-template-columns: 1fr; } }
-
-  .export-badges { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 12px; }
-  .badge {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    margin: 0;
+    color: var(--text);
     background: var(--navy);
-    color: #fff;
-    font-size: 0.85em;
-    font-weight: 700;
-    padding: 5px 12px;
-    border-radius: 999px;
+    line-height: 1.6;
   }
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+  .mono { font-family: 'IBM Plex Mono', ui-monospace, monospace; }
 
-  footer { margin-top: 72px; padding-top: 24px; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.9em; }
+  header.top {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(13,21,38,0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+  }
+  header.top .wrap { display: flex; align-items: center; justify-content: space-between; padding: 18px 24px; gap: 20px; flex-wrap: wrap; }
+  .brand { display: flex; align-items: center; gap: 10px; font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 1.3em; letter-spacing: 0.5px; }
+  .brand .mark { color: var(--orange); font-weight: 700; font-size: 1.3em; }
+  nav.top-nav { display: flex; gap: 30px; }
+  nav.top-nav a { color: var(--muted); text-decoration: none; font-weight: 500; font-size: 0.92em; letter-spacing: 0.3px; text-transform: uppercase; }
+  nav.top-nav a.active { color: var(--text); border-bottom: 2px solid var(--orange); padding-bottom: 4px; }
+  nav.top-nav a:hover { color: var(--text); }
+  .top-right { display: flex; align-items: center; gap: 14px; }
+  .lang-toggle { display: flex; gap: 6px; font-family: 'IBM Plex Mono', monospace; font-size: 0.85em; }
+  .lang-toggle a { color: var(--muted); text-decoration: none; padding: 4px 10px; border-radius: 6px; font-weight: 600; }
+  .lang-toggle a.active { background: var(--orange); color: #14203a; }
+  .btn-download {
+    background: var(--orange); color: #14203a; font-weight: 700; text-decoration: none;
+    padding: 11px 22px; border-radius: 8px; font-size: 0.88em; letter-spacing: 0.4px; text-transform: uppercase;
+  }
+  .btn-download:hover { opacity: 0.9; }
+
+  .eyebrow { display: flex; align-items: center; gap: 12px; color: var(--orange); font-family: 'IBM Plex Mono', monospace; font-size: 0.85em; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 18px; }
+  .eyebrow .rule { width: 28px; height: 2px; background: var(--orange); display: inline-block; }
+  h2.big-title { font-family: 'Oswald', sans-serif; font-weight: 700; text-transform: uppercase; font-size: 2.4em; line-height: 1.08; margin: 0 0 32px; text-wrap: balance; }
+  .stripe-bar { height: 14px; background: repeating-linear-gradient(45deg, var(--orange) 0 14px, #fff 14px 28px); }
+
+  .btn-primary { background: var(--orange); color: #14203a; font-weight: 700; text-decoration: none; padding: 15px 30px; border-radius: 10px; font-size: 1em; letter-spacing: 0.3px; text-transform: uppercase; display: inline-block; }
+  .btn-secondary { background: transparent; color: var(--text); text-decoration: none; padding: 15px 30px; border-radius: 10px; font-size: 1em; border: 1px solid var(--border); letter-spacing: 0.3px; text-transform: uppercase; display: inline-block; }
+
+  /* Hero */
+  section.hero { padding: 70px 0 0; }
+  .hero-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 50px; align-items: center; padding-bottom: 60px; }
+  @media (max-width: 880px) { .hero-grid { grid-template-columns: 1fr; } }
+  .hero h1 { font-family: 'Oswald', sans-serif; font-weight: 700; text-transform: uppercase; font-size: 2.9em; line-height: 1.06; letter-spacing: 0.3px; margin: 0 0 22px; text-wrap: balance; }
+  .hero p.lead { color: var(--muted); font-size: 1.08em; margin: 0 0 30px; max-width: 540px; }
+  .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 26px; }
+  .hero-stats { display: flex; gap: 22px; flex-wrap: wrap; font-family: 'IBM Plex Mono', monospace; font-size: 0.85em; color: var(--muted); }
+  .hero-stats b { color: var(--text); font-weight: 600; }
+
+  .diagram-card { background: var(--navy-3); border-radius: 18px; padding: 30px; }
+  .diagram-card svg { width: 100%; height: auto; display: block; }
+
+  /* Accuracy note */
+  section.accuracy { padding: 50px 0; }
+  .note-box { background: var(--navy-2); border-left: 3px solid var(--orange); border-radius: 10px; padding: 28px 32px; color: var(--muted); font-size: 1.02em; }
+  .note-box b { color: var(--text); }
+
+  /* Generic feature grids */
+  section.summary { padding: 20px 0 70px; }
+  .feat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+  .feat-grid.cols-2 { grid-template-columns: 1fr 1fr; }
+  @media (max-width: 760px) { .feat-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 480px) { .feat-grid { grid-template-columns: 1fr; } }
+  .feat-card { background: var(--navy-3); border-radius: 12px; padding: 30px 26px; }
+  .feat-card h3 { font-family: 'Oswald', sans-serif; text-transform: uppercase; font-weight: 600; letter-spacing: 0.5px; margin: 0 0 14px; font-size: 1.15em; }
+  .feat-card p { margin: 0; color: var(--muted); font-size: 0.95em; }
+  .feat-card .card-eyebrow { color: var(--orange); font-family: 'IBM Plex Mono', monospace; font-size: 0.78em; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+  .feat-card .card-eyebrow .rule { width: 18px; height: 2px; background: var(--orange); display: inline-block; }
+
+  /* 21 advantages */
+  section.advantages { padding: 70px 0 40px; background: var(--navy-2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .tabs { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 40px; }
+  .tab {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.82em; letter-spacing: 0.5px; text-transform: uppercase; font-weight: 600;
+    padding: 11px 20px; border-radius: 999px; border: 1px solid var(--border);
+    background: transparent; color: var(--muted); cursor: pointer;
+  }
+  .tab.active { background: var(--orange); color: #14203a; border-color: var(--orange); }
+
+  .adv-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 48px; }
+  @media (max-width: 680px) { .adv-grid { grid-template-columns: 1fr; } }
+  .adv-item { padding: 22px 0; border-top: 1px solid var(--border); display: flex; gap: 18px; }
+  .adv-item .num { font-family: 'IBM Plex Mono', monospace; color: var(--orange); font-weight: 600; font-size: 0.95em; min-width: 26px; }
+  .adv-item h3 { margin: 0 0 6px; font-size: 1.05em; font-weight: 600; }
+  .adv-item p { margin: 0; color: var(--muted); font-size: 0.95em; }
+  .adv-panel { display: none; }
+  .adv-panel.active { display: block; }
+
+  .stats-bar { margin: 50px 0 0; border: 1px solid var(--border); border-radius: 14px; overflow: hidden; display: grid; grid-template-columns: repeat(4, 1fr); background: var(--navy-3); }
+  @media (max-width: 640px) { .stats-bar { grid-template-columns: 1fr 1fr; } }
+  .stat { padding: 22px 26px; border-right: 1px solid var(--border); }
+  @media (min-width: 641px) { .stat:nth-child(2n) { border-right: 1px solid var(--border); } .stat:last-child { border-right: none; } }
+  .stat:last-child { border-right: none; }
+  .stat .label { font-family: 'IBM Plex Mono', monospace; color: var(--muted); font-size: 0.78em; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 6px; }
+  .stat .value { font-family: 'IBM Plex Mono', monospace; color: var(--orange); font-size: 1.15em; font-weight: 600; }
+
+  /* CTA banner */
+  section.cta-wrap { padding: 60px 0; }
+  .cta-banner { background: var(--orange); border-radius: 16px; padding: 60px 40px; text-align: center; }
+  .cta-banner h2 { font-family: 'Oswald', sans-serif; font-weight: 700; text-transform: uppercase; color: var(--navy); font-size: 2em; margin: 0 0 12px; text-wrap: balance; }
+  .cta-banner p { color: #4a2f14; font-size: 1.05em; margin: 0 0 26px; }
+  .cta-banner .btn-dark { background: var(--navy); color: #fff; font-weight: 700; text-decoration: none; padding: 15px 30px; border-radius: 10px; font-size: 0.95em; letter-spacing: 0.4px; text-transform: uppercase; font-family: 'IBM Plex Mono', monospace; display: inline-block; }
+
+  /* Features page */
+  section.features { padding: 80px 0 20px; }
+  section.features h2.big-title { font-size: 2.4em; }
+  section.features p.lead { max-width: 620px; color: var(--muted); font-size: 1.05em; margin: 0 0 50px; }
+  .feat-block { margin-bottom: 80px; }
+  .feat-block .stripe-bar { margin: 0 0 60px; }
+
+  section.download { padding: 70px 0; text-align: center; background: var(--navy-2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  section.download h2.big-title { text-align: center; }
+  section.download p.lead { max-width: 560px; margin: 0 auto 30px; color: var(--muted); }
+
+  section.contact { padding: 70px 0; }
+  section.contact .lead { max-width: 560px; color: var(--muted); font-size: 1.05em; margin: 0 0 50px; }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px 60px; }
+  @media (max-width: 680px) { .contact-grid { grid-template-columns: 1fr; } }
+  .contact-item h3 { font-family: 'Oswald', sans-serif; text-transform: uppercase; font-weight: 600; letter-spacing: 0.5px; margin: 0 0 10px; font-size: 1.1em; }
+  .contact-item p { color: var(--muted); margin: 0 0 12px; }
+  .contact-item a { color: var(--orange); font-family: 'IBM Plex Mono', monospace; text-decoration: none; font-weight: 600; }
+
+  footer { padding: 40px 0 60px; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.9em; text-align: center; }
   footer a { color: var(--orange); text-decoration: none; font-weight: 600; }
+  footer .foot-links { margin-bottom: 10px; }
+  footer .foot-links a { margin: 0 8px; }
 </style>
 </head>
 <body>
 
 <header class="top">
-  <div class="brand"><span class="ruler"></span> SITE DIM</div>
-  <nav class="top-nav">
-    <a href="support.html">Support</a>
-    <a href="confidentialite.html">Privacy Policy</a>
-    <span class="lang-switch"><a href="index.html">Français</a></span>
-  </nav>
+  <div class="wrap">
+    <div class="brand"><span class="mark">⌐</span> SITE DIM</div>
+    <nav class="top-nav">
+      <a href="#home" class="active">Home</a>
+      <a href="#features">Features</a>
+      <a href="#download">Download</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="top-right">
+      <div class="lang-toggle">
+        <a href="index.html">FR</a>
+        <a href="en.html" class="active">EN</a>
+      </div>
+      <a class="btn-download" href="https://apps.apple.com/app/site-dim/id6807966608">Download</a>
+    </div>
+  </div>
 </header>
 
-<section class="hero">
-  <h1>SITE DIM</h1>
-  <p class="slogan">Measure. Calculate. Build.</p>
-  <p class="lead">
-    SITE DIM turns your iPhone into a construction takeoff tool. Aim, tap, and the app traces the
-    outline in augmented reality, closes the shape, and calculates area, perimeter and volume
-    automatically — no more tape measure, no more manual math on site.
-  </p>
-  <a class="cta" href="https://apps.apple.com/app/site-dim/id6807966608">Download on the App Store</a>
+<section class="hero" id="home">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <p class="eyebrow"><span class="rule"></span> AUGMENTED REALITY QUANTITY TAKEOFF</p>
+        <h1>Measure a job site as fast as a glance.</h1>
+        <p class="lead">SITE DIM turns your iPhone or iPad's camera and LiDAR sensor into a survey tool. Walls, floors, ceilings, roofs, lengths and lots — measured in seconds, no tape measure or laser theodolite required.</p>
+        <div class="hero-ctas">
+          <a class="btn-primary" href="https://apps.apple.com/app/site-dim/id6807966608">Download on the App Store</a>
+          <a class="btn-secondary" href="#features">See features</a>
+        </div>
+        <div class="hero-stats">
+          <span><b>iOS 17+</b> required</span>
+          <span><b>LiDAR</b> sensor required</span>
+          <span>Bilingual <b>FR / EN</b></span>
+          <span><b>$44.99 CAD</b></span>
+        </div>
+      </div>
+      <div class="diagram-card">
+        <svg viewBox="0 0 420 420" fill="none">
+          <polygon points="70,70 300,70 300,190 360,190 360,350 70,350"
+            stroke="#eef1f8" stroke-width="2.5" fill="none" stroke-dasharray="10 6" />
+          <polygon points="70,70 300,70 300,190 360,190 360,350 70,350"
+            stroke="#f97316" stroke-width="2.5" fill="none" stroke-dasharray="2 220 8 8 8 90 8 8 8 160 8 8" opacity="0.9" />
+          <circle cx="70" cy="70" r="5" fill="#eef1f8" />
+          <circle cx="300" cy="70" r="5" fill="#eef1f8" />
+          <circle cx="300" cy="190" r="5" fill="#eef1f8" />
+          <circle cx="360" cy="190" r="5" fill="#eef1f8" />
+          <circle cx="360" cy="350" r="5" fill="#eef1f8" />
+          <circle cx="70" cy="350" r="5" fill="#eef1f8" />
+          <line x1="70" y1="40" x2="300" y2="40" stroke="#f97316" stroke-width="1.5" />
+          <line x1="70" y1="32" x2="70" y2="48" stroke="#f97316" stroke-width="1.5" />
+          <line x1="300" y1="32" x2="300" y2="48" stroke="#f97316" stroke-width="1.5" />
+          <text x="185" y="30" fill="#f97316" font-family="IBM Plex Mono, monospace" font-size="15" text-anchor="middle">7.32 m</text>
+          <line x1="40" y1="70" x2="40" y2="350" stroke="#f97316" stroke-width="1.5" />
+          <line x1="32" y1="70" x2="48" y2="70" stroke="#f97316" stroke-width="1.5" />
+          <line x1="32" y1="350" x2="48" y2="350" stroke="#f97316" stroke-width="1.5" />
+          <text x="26" y="215" fill="#f97316" font-family="IBM Plex Mono, monospace" font-size="15" text-anchor="middle" transform="rotate(-90 26 215)">8.85 m</text>
+          <rect x="150" y="235" width="150" height="66" rx="10" fill="#0d1526" stroke="#f97316" stroke-width="1.5" />
+          <text x="225" y="262" fill="#94a0bd" font-family="IBM Plex Mono, monospace" font-size="11" text-anchor="middle" letter-spacing="1">AREA</text>
+          <text x="225" y="288" fill="#eef1f8" font-family="IBM Plex Mono, monospace" font-size="20" font-weight="700" text-anchor="middle">55.4 m²</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+  <div class="stripe-bar"></div>
 </section>
 
-<h2 class="section-title">Six survey types, one tool</h2>
-<p class="section-sub">Every surface type has its own capture flow, built around how it's actually measured on site.</p>
-<div class="grid">
-  <div class="card">
-    <span class="icon">🧱</span>
-    <h3>Walls</h3>
-    <p>Trace a wall's outline and subtract doors and windows directly — net area is calculated automatically.</p>
+<section class="accuracy">
+  <div class="wrap">
+    <div class="note-box">
+      <b>A note on accuracy.</b> SITE DIM is not more precise than a tape measure or a laser
+      theodolite — a well-used physical tool remains the most exact instrument for hitting the exact
+      edge of an object. What SITE DIM brings is <b>reliability</b> that manual measurement struggles
+      to match: a perfectly straight line between two points, horizontally or vertically, every time.
+      For the vast majority of job-site surveys, that level of accuracy is more than enough.
+    </div>
   </div>
-  <div class="card">
-    <span class="icon">⬇️</span>
-    <h3>Floors</h3>
-    <p>Same tracing and net-area calculation, applied to floor surveys.</p>
-  </div>
-  <div class="card">
-    <span class="icon">⬆️</span>
-    <h3>Ceilings</h3>
-    <p>Aim upward — the app adapts automatically to the surface's orientation.</p>
-  </div>
-  <div class="card">
-    <span class="icon">🔺</span>
-    <h3>Roofs</h3>
-    <p>Measure slope and façade separately, across multiple segments if a panel is interrupted (a dormer, etc.) — area = total slope × total façade, never an auto-calculated pitch.</p>
-  </div>
-  <div class="card">
-    <span class="icon">📏</span>
-    <h3>Linear</h3>
-    <p>Trim, baseboards, and any point-to-point length — a direct, single measurement.</p>
-  </div>
-  <div class="card">
-    <span class="icon">⛰️</span>
-    <h3>Terrain</h3>
-    <p>Full topographic survey with triangulation, excavation volume calculation, and up to 3 sequential fill layers — each with its own volume.</p>
-  </div>
-</div>
+</section>
 
-<h2 class="section-title">Capture fast, capture right</h2>
-<p class="section-sub">A shape selector at the top of the screen picks the fastest capture method for each surface.</p>
-<div class="two-col">
-  <div>
-    <ul class="precision-list">
-      <li><strong>Rectangle</strong> — 2 measurements (width, length), automatic right angles.</li>
-      <li><strong>Circle</strong> — a single diameter measurement.</li>
-      <li><strong>Half-moon</strong> — a chord plus one radius point.</li>
-      <li><strong>Full trace</strong> — for any irregular shape, a polygon with variable angles.</li>
-    </ul>
+<section class="summary">
+  <div class="wrap">
+    <p class="eyebrow"><span class="rule"></span> WHAT SITE DIM MEASURES</p>
+    <h2 class="big-title">One device for the whole survey</h2>
+    <div class="feat-grid">
+      <div class="feat-card"><h3>Walls, floors, ceilings</h3><p>Areas and volumes calculated instantly, room by room.</p></div>
+      <div class="feat-card"><h3>Roofs</h3><p>Roof surface surveys taken from the ground or from a safe vantage point.</p></div>
+      <div class="feat-card"><h3>Lengths</h3><p>Baseboards, mouldings and other linear runs measured in one pass.</p></div>
+      <div class="feat-card"><h3>Lots</h3><p>Lot area with excavation and backfill calculations, up to 3 distinct backfills.</p></div>
+      <div class="feat-card"><h3>4 capture modes</h3><p>Rectangle, circle, half-moon or full trace — matched to the real shape of the space.</p></div>
+      <div class="feat-card"><h3>Professional exports</h3><p>Full-page PDF and vector DXF compatible with AutoCAD, ready to share.</p></div>
+    </div>
   </div>
-  <div>
-    <ul class="precision-list">
-      <li><strong>Corner squaring</strong> — a blue button snaps an angle near 90°/180° to its exact value, without ever moving an already-confirmed point.</li>
-      <li><strong>Automatic point validation</strong> — a captured point turns from red to green on its own, ready for the next one.</li>
-      <li><strong>Dual dimension labels</strong> — metric above, feet-inches-fraction below every line, just like a physical tape measure.</li>
-    </ul>
-  </div>
-</div>
+</section>
 
-<h2 class="section-title">Precision built for the job site</h2>
-<div class="grid">
-  <div class="card">
-    <span class="icon">📡</span>
-    <h3>LiDAR preference</h3>
-    <p>On compatible devices, every captured point favors a hit on the LiDAR mesh over an estimated plane, for higher accuracy.</p>
-  </div>
-  <div class="card">
-    <span class="icon">🎯</span>
-    <h3>Averaged, locked position</h3>
-    <p>Each point is computed once from several samples, snapped to the real surface, then never moves again — no drift over the course of a survey.</p>
-  </div>
-  <div class="card">
-    <span class="icon">🔋</span>
-    <h3>Built to stay cool</h3>
-    <p>AR rendering automatically slows down whenever the aim is still, keeping your device cool during a long survey.</p>
-  </div>
-</div>
+<section class="advantages" id="advantages">
+  <div class="wrap">
+    <p class="eyebrow"><span class="rule"></span> 21 ADVANTAGES</p>
+    <h2 class="big-title">Why switch to augmented<br>reality surveying</h2>
 
-<h2 class="section-title">Your surveys, ready to share</h2>
-<p class="section-sub">Every captured surface shows a calibrated plan view — pinch to zoom, drag to pan — identical on screen and in every export.</p>
-<div class="export-badges">
-  <span class="badge">Image export (PNG)</span>
-  <span class="badge">Vector export (.dxf)</span>
-  <span class="badge">Full-page PDF table</span>
-</div>
-<p style="margin-top:16px;">
-  The full survey summary — every surface, area, perimeter and volume — exports as a clean, properly
-  laid-out PDF table, ready to print or send to a client or supplier. The .dxf file opens natively in
-  CAD software (AutoCAD and equivalents).
-</p>
+    <div class="tabs" role="tablist">
+      <button class="tab active" data-tab="speed">Speed</button>
+      <button class="tab" data-tab="reliability">Reliability</button>
+      <button class="tab" data-tab="safety">Safety &amp; Convenience</button>
+      <button class="tab" data-tab="deliverables">Deliverables &amp; Data</button>
+      <button class="tab" data-tab="profitability">Profitability</button>
+      <button class="tab" data-tab="quebec">Quebec-made</button>
+    </div>
 
-<h2 class="section-title">Built for every job site</h2>
-<div class="grid">
-  <div class="card">
-    <span class="icon">🌐</span>
-    <h3>Bilingual</h3>
-    <p>Full interface in English and French, switchable at any time.</p>
-  </div>
-  <div class="card">
-    <span class="icon">📐</span>
-    <h3>Metric or imperial</h3>
-    <p>Millimeters/meters or feet-inches-fraction down to 1/16" — whichever you're used to.</p>
-  </div>
-  <div class="card">
-    <span class="icon">🔒</span>
-    <h3>100% on-device, zero data collected</h3>
-    <p>No account, no server, no tracking. Your surveys stay on your device.</p>
-  </div>
-</div>
+    <div class="adv-panel active" data-panel="speed">
+      <div class="adv-grid">
+        <div class="adv-item"><span class="num">01</span><div><h3>Measured in seconds</h3><p>A full room surveyed far faster than with a tape measure.</p></div></div>
+        <div class="adv-item"><span class="num">02</span><div><h3>Instant calculation</h3><p>Areas and volumes obtained immediately, no manual math afterward.</p></div></div>
+        <div class="adv-item"><span class="num">03</span><div><h3>One single pass</h3><p>Walls, floors and ceilings captured in a single walk-through.</p></div></div>
+        <div class="adv-item"><span class="num">04</span><div><h3>Fewer return trips</h3><p>Complete surveys the first time cut down on extra site visits.</p></div></div>
+      </div>
+    </div>
 
-<section style="text-align:center; margin-top:64px;">
-  <a class="cta" href="https://apps.apple.com/app/site-dim/id6807966608">Download SITE DIM on the App Store</a>
+    <div class="adv-panel" data-panel="reliability">
+      <div class="adv-grid">
+        <div class="adv-item"><span class="num">05</span><div><h3>A guaranteed straight line</h3><p>A perfectly straight line between two points, horizontally or vertically — hard to hold freehand with a tape measure over a long distance.</p></div></div>
+        <div class="adv-item"><span class="num">06</span><div><h3>Automatic corner squaring</h3><p>Corners are squared automatically, removing a frequent source of angle error.</p></div></div>
+        <div class="adv-item"><span class="num">07</span><div><h3>Accuracy that's enough</h3><p>Suited to the vast majority of everyday job-site surveys.</p></div></div>
+        <div class="adv-item"><span class="num">08</span><div><h3>Measurements recorded digitally</h3><p>Safe from a misread number or a transcription error on a notepad.</p></div></div>
+      </div>
+    </div>
+
+    <div class="adv-panel" data-panel="safety">
+      <div class="adv-grid">
+        <div class="adv-item"><span class="num">09</span><div><h3>Measure alone</h3><p>No need for a second person to hold the other end of the tape.</p></div></div>
+        <div class="adv-item"><span class="num">10</span><div><h3>Less climbing and reaching</h3><p>No need to climb or stretch a tape measure across long spans or heights.</p></div></div>
+        <div class="adv-item"><span class="num">11</span><div><h3>One device to bring</h3><p>An iPhone or iPad replaces a tape measure, laser theodolite and site notebook.</p></div></div>
+      </div>
+    </div>
+
+    <div class="adv-panel" data-panel="deliverables">
+      <div class="adv-grid">
+        <div class="adv-item"><span class="num">12</span><div><h3>Full-page PDF export</h3><p>A document ready to share with a client, subcontractor or supplier.</p></div></div>
+        <div class="adv-item"><span class="num">13</span><div><h3>Vector DXF export</h3><p>Compatible with AutoCAD, usable directly in technical drawings.</p></div></div>
+        <div class="adv-item"><span class="num">14</span><div><h3>Metric and imperial together</h3><p>Both systems displayed at once, no manual conversion.</p></div></div>
+        <div class="adv-item"><span class="num">15</span><div><h3>Organized data</h3><p>All measurements from a project grouped and sorted automatically.</p></div></div>
+      </div>
+    </div>
+
+    <div class="adv-panel" data-panel="profitability">
+      <div class="adv-grid">
+        <div class="adv-item"><span class="num">16</span><div><h3>Time reinvested</h3><p>Less time spent measuring means more time bidding or building.</p></div></div>
+        <div class="adv-item"><span class="num">17</span><div><h3>Fewer ordering errors</h3><p>Reliable areas and volumes reduce material ordering mistakes.</p></div></div>
+        <div class="adv-item"><span class="num">18</span><div><h3>One tool does it all</h3><p>Replaces several specialized measuring instruments.</p></div></div>
+      </div>
+    </div>
+
+    <div class="adv-panel" data-panel="quebec">
+      <div class="adv-grid">
+        <div class="adv-item"><span class="num">19</span><div><h3>Designed in Quebec</h3><p>Developed by JDG inc. for the realities of the local job site.</p></div></div>
+        <div class="adv-item"><span class="num">20</span><div><h3>Bilingual from day one</h3><p>The app is fully available in French and English.</p></div></div>
+        <div class="adv-item"><span class="num">21</span><div><h3>Built with tradespeople</h3><p>Developed with local contractors and estimators.</p></div></div>
+      </div>
+    </div>
+
+    <div class="stats-bar">
+      <div class="stat"><div class="label">Price</div><div class="value mono">$44.99 CAD</div></div>
+      <div class="stat"><div class="label">Platform</div><div class="value mono">iOS 17+</div></div>
+      <div class="stat"><div class="label">Sensor</div><div class="value mono">LiDAR required</div></div>
+      <div class="stat"><div class="label">Languages</div><div class="value mono">FR / EN</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-wrap">
+  <div class="wrap">
+    <div class="cta-banner">
+      <h2>See SITE DIM in action</h2>
+      <p>Available on LiDAR-equipped iPhone and iPad.</p>
+      <a class="btn-dark" href="#download">See the download page</a>
+    </div>
+  </div>
+</section>
+
+<section class="features" id="features">
+  <div class="wrap">
+    <p class="eyebrow"><span class="rule"></span> FEATURES</p>
+    <h2 class="big-title">Everything you need to survey a job site</h2>
+    <p class="lead">The iPhone or iPad's camera and LiDAR sensor, combined to capture, calculate and export your surveys — without leaving the app.</p>
+  </div>
+
+  <div class="feat-block">
+    <div class="stripe-bar"></div>
+    <div class="wrap">
+      <p class="eyebrow"><span class="rule"></span> WHAT YOU CAN MEASURE</p>
+      <h2 class="big-title">Six survey types, one device</h2>
+      <div class="feat-grid">
+        <div class="feat-card"><h3>Walls</h3><p>Each wall's area calculated automatically, openings included.</p></div>
+        <div class="feat-card"><h3>Floors</h3><p>Floor area of a room, even an irregularly shaped one.</p></div>
+        <div class="feat-card"><h3>Ceilings</h3><p>Ceiling survey captured in the same pass as the walls.</p></div>
+        <div class="feat-card"><h3>Roofs</h3><p>Roof surface measured safely, without walking the entire roof.</p></div>
+        <div class="feat-card"><h3>Lengths</h3><p>Baseboards, mouldings and other linear elements measured in one stroke.</p></div>
+        <div class="feat-card"><h3>Lots</h3><p>Lot area with excavation and backfill calculations.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="feat-block">
+    <div class="wrap">
+      <p class="eyebrow"><span class="rule"></span> CAPTURE</p>
+      <h2 class="big-title">4 modes matched to the real shape of the space</h2>
+      <div class="feat-grid">
+        <div class="feat-card"><h3>Rectangle</h3><p>For right-angled rooms and surfaces — the fastest mode.</p></div>
+        <div class="feat-card"><h3>Circle</h3><p>For circular surfaces, columns and rounded elements.</p></div>
+        <div class="feat-card"><h3>Half-moon</h3><p>For semi-circular surfaces and composite shapes.</p></div>
+        <div class="feat-card"><h3>Full trace</h3><p>To capture any irregular shape, point by point.</p></div>
+        <div class="feat-card"><h3>Automatic corner squaring</h3><p>Every corner captured is squared automatically, no manual adjustment needed.</p></div>
+        <div class="feat-card"><h3>Excavation &amp; backfill</h3><p>On a lot survey, calculate up to 3 distinct backfills.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="feat-block">
+    <div class="wrap">
+      <div class="feat-grid cols-2">
+        <div class="feat-card"><div class="card-eyebrow"><span class="rule"></span> PDF EXPORT</div><h3>Full page, ready to share</h3><p>A clear document with every dimension surveyed, generated in one tap — for a client, subcontractor or supplier.</p></div>
+        <div class="feat-card"><div class="card-eyebrow"><span class="rule"></span> DXF EXPORT</div><h3>Vector, AutoCAD compatible</h3><p>Surveys captured on site become directly usable in technical drawings.</p></div>
+        <div class="feat-card"><div class="card-eyebrow"><span class="rule"></span> UNITS</div><h3>Metric and imperial together</h3><p>Both systems displayed at once, no toggling or manual conversion.</p></div>
+        <div class="feat-card"><div class="card-eyebrow"><span class="rule"></span> LANGUAGE</div><h3>Fully bilingual</h3><p>Interface and exports available in French and English.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="cta-banner">
+      <h2>See SITE DIM in action</h2>
+      <p>Available on LiDAR-equipped iPhone and iPad.</p>
+      <a class="btn-dark" href="#download">See the download page</a>
+    </div>
+  </div>
+</section>
+
+<section class="download" id="download">
+  <div class="wrap">
+    <p class="eyebrow" style="justify-content:center;"><span class="rule"></span> DOWNLOAD</p>
+    <h2 class="big-title">Ready to survey your next job site?</h2>
+    <p class="lead">Available on the App Store for LiDAR-equipped iPhone and iPad, iOS 17 and up.</p>
+    <a class="btn-primary" href="https://apps.apple.com/app/site-dim/id6807966608">Download SITE DIM</a>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap">
+    <p class="eyebrow"><span class="rule"></span> CONTACT</p>
+    <h2 class="big-title">Let's talk</h2>
+    <p class="lead">General questions, support or press inquiries — the JDG inc. team is here to help.</p>
+  </div>
+  <div class="stripe-bar" style="margin-bottom:60px;"></div>
+  <div class="wrap">
+    <div class="contact-grid">
+      <div class="contact-item">
+        <h3>Support &amp; general questions</h3>
+        <p>For any question about using SITE DIM, device compatibility or your purchase.</p>
+        <a href="mailto:jdgeg@icloud.com">jdgeg@icloud.com</a>
+      </div>
+      <div class="contact-item">
+        <h3>Press &amp; media</h3>
+        <p>A bilingual press kit (release, advantages, features, tech sheet) is available on request.</p>
+        <a href="mailto:jdgeg@icloud.com">jdgeg@icloud.com</a>
+      </div>
+      <div class="contact-item">
+        <h3>Publisher</h3>
+        <p>SITE DIM is designed and developed by JDG inc.</p>
+        <a href="#" style="cursor:default;">JDG inc. — Quebec, Canada</a>
+      </div>
+      <div class="contact-item">
+        <h3>App</h3>
+        <p>Available on the App Store for LiDAR-equipped iPhone and iPad.</p>
+        <a href="#download">See the download page</a>
+      </div>
+    </div>
+  </div>
 </section>
 
 <footer>
-  <p>SITE DIM is developed by JDG Entrepreneur Général Inc.</p>
-  <p><a href="support.html">Support</a> · <a href="confidentialite.html">Privacy Policy</a> · <a href="index.html">Français</a></p>
-  <p>© 2026 JDG-inc. All rights reserved.</p>
+  <div class="wrap">
+    <p class="foot-links"><a href="support-en.html">Support</a> · <a href="confidentialite-en.html">Privacy Policy</a> · <a href="index.html">Français</a></p>
+    <p>SITE DIM is developed by JDG Entrepreneur Général Inc. — © 2026 JDG-inc. All rights reserved.</p>
+  </div>
 </footer>
+
+<script>
+  document.querySelectorAll('.tab').forEach(function (tab) {
+    tab.addEventListener('click', function () {
+      document.querySelectorAll('.tab').forEach(function (t) { t.classList.remove('active'); });
+      document.querySelectorAll('.adv-panel').forEach(function (p) { p.classList.remove('active'); });
+      tab.classList.add('active');
+      document.querySelector('.adv-panel[data-panel="' + tab.dataset.tab + '"]').classList.add('active');
+    });
+  });
+</script>
 
 </body>
 </html>
