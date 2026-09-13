@@ -3,38 +3,229 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="SITE DIM transforme votre iPhone en outil de relevé de chantier par réalité augmentée : murs, planchers, plafonds, toitures, moulures et terrain — avec calcul automatique de superficie et de volume.">
 <title>SITE DIM — Relevé de quantité par réalité augmentée</title>
 <style>
-  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; max-width: 720px; margin: 0 auto; padding: 40px 20px; line-height: 1.6; color: #14203a; background: #fff; }
-  h1 { font-size: 2em; margin-bottom: 0; }
-  .slogan { color: #666; margin-top: 4px; margin-bottom: 32px; }
-  nav a { margin-right: 20px; color: #f97316; text-decoration: none; font-weight: 600; }
-  nav { margin-bottom: 32px; }
-  ul { padding-left: 20px; }
+  :root {
+    --navy: #14203a;
+    --orange: #f97316;
+    --bg: #fff;
+    --muted: #5b6478;
+    --card-bg: #f7f8fb;
+    --border: #e6e8ee;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 0 20px 60px;
+    line-height: 1.6;
+    color: var(--navy);
+    background: var(--bg);
+  }
+  header.top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border);
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 1.2em; }
+  .brand .ruler { display: inline-block; width: 26px; height: 14px; border: 2px solid var(--orange); border-radius: 4px; position: relative; }
+  nav.top-nav a { color: var(--muted); text-decoration: none; font-weight: 600; margin-left: 18px; font-size: 0.95em; }
+  nav.top-nav a:hover { color: var(--orange); }
+  .lang-switch a { color: var(--orange); font-weight: 700; }
+
+  .hero { padding: 56px 0 40px; text-align: center; }
+  .hero h1 { font-size: 2.4em; margin-bottom: 8px; letter-spacing: -0.5px; }
+  .hero .slogan { color: var(--muted); font-size: 1.2em; margin-bottom: 28px; }
+  .hero p.lead { max-width: 620px; margin: 0 auto 32px; font-size: 1.08em; }
+  .cta {
+    display: inline-block;
+    background: var(--orange);
+    color: #fff;
+    font-weight: 700;
+    text-decoration: none;
+    padding: 14px 28px;
+    border-radius: 10px;
+    font-size: 1.05em;
+  }
+  .cta:hover { opacity: 0.92; }
+
+  h2.section-title { font-size: 1.6em; margin-top: 64px; margin-bottom: 8px; }
+  p.section-sub { color: var(--muted); margin-top: 0; margin-bottom: 28px; }
+
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px;
+  }
+  .card .icon { font-size: 1.6em; margin-bottom: 8px; display: block; }
+  .card h3 { margin: 0 0 6px; font-size: 1.05em; }
+  .card p { margin: 0; color: var(--muted); font-size: 0.95em; }
+
+  .precision-list { padding-left: 20px; }
+  .precision-list li { margin-bottom: 10px; }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
+  @media (max-width: 640px) { .two-col { grid-template-columns: 1fr; } }
+
+  .export-badges { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 12px; }
+  .badge {
+    background: var(--navy);
+    color: #fff;
+    font-size: 0.85em;
+    font-weight: 700;
+    padding: 5px 12px;
+    border-radius: 999px;
+  }
+
+  footer { margin-top: 72px; padding-top: 24px; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.9em; }
+  footer a { color: var(--orange); text-decoration: none; font-weight: 600; }
 </style>
 </head>
 <body>
-<h1>SITE DIM</h1>
-<p class="slogan">Mesurez. Calculez. Construisez.</p>
 
-<nav>
-  <a href="support.html">Support</a>
-  <a href="confidentialite.html">Politique de confidentialité</a>
-</nav>
+<header class="top">
+  <div class="brand"><span class="ruler"></span> SITE DIM</div>
+  <nav class="top-nav">
+    <a href="support.html">Support</a>
+    <a href="confidentialite.html">Confidentialité</a>
+    <span class="lang-switch"><a href="en.html">English</a></span>
+  </nav>
+</header>
 
-<p>SITE DIM transforme votre iPhone en outil de relevé de chantier. Tracez un polygone en réalité augmentée, l'application ferme la forme et calcule la superficie automatiquement — plus besoin de ruban à mesurer ni de calculs manuels.</p>
+<section class="hero">
+  <h1>SITE DIM</h1>
+  <p class="slogan">Mesurez. Calculez. Construisez.</p>
+  <p class="lead">
+    SITE DIM transforme votre iPhone en outil de relevé de chantier. Visez, touchez, et l'application
+    trace le contour en réalité augmentée, ferme la forme et calcule superficie, périmètre et volume
+    automatiquement — plus besoin de ruban à mesurer ni de calculs manuels sur le terrain.
+  </p>
+  <a class="cta" href="https://apps.apple.com/app/site-dim/id6807966608">Télécharger sur l'App Store</a>
+</section>
 
-<h2>Relevés disponibles</h2>
-<ul>
-  <li>Mural — avec soustraction des ouvertures (portes, fenêtres)</li>
-  <li>Plancher et plafond</li>
-  <li>Toiture — calcul pente × façade</li>
-  <li>Linéaire — moulures, plinthes, longueurs diverses</li>
-  <li>Terrain — relevé topographique complet avec calcul de volume d'excavation et rendu 3D</li>
-</ul>
+<h2 class="section-title">Six types de relevé, un seul outil</h2>
+<p class="section-sub">Chaque type de surface a son propre flux de capture adapté à sa réalité de chantier.</p>
+<div class="grid">
+  <div class="card">
+    <span class="icon">🧱</span>
+    <h3>Mural</h3>
+    <p>Tracez le contour d'un mur et soustrayez portes et fenêtres directement — la superficie nette est calculée automatiquement.</p>
+  </div>
+  <div class="card">
+    <span class="icon">⬇️</span>
+    <h3>Plancher</h3>
+    <p>Relevé de surface au sol, même principe de traçage et de calcul net.</p>
+  </div>
+  <div class="card">
+    <span class="icon">⬆️</span>
+    <h3>Plafond</h3>
+    <p>Visez vers le haut, l'app s'adapte automatiquement à l'orientation de la surface.</p>
+  </div>
+  <div class="card">
+    <span class="icon">🔺</span>
+    <h3>Toiture</h3>
+    <p>Mesurez pente et façade séparément, en plusieurs segments si le pan est interrompu (lucarne, etc.) — superficie = pente totale × façade totale, jamais de pente calculée automatiquement.</p>
+  </div>
+  <div class="card">
+    <span class="icon">📏</span>
+    <h3>Linéaire</h3>
+    <p>Moulures, plinthes et longueurs diverses — une mesure directe, point à point.</p>
+  </div>
+  <div class="card">
+    <span class="icon">⛰️</span>
+    <h3>Terrain</h3>
+    <p>Relevé topographique complet avec triangulation, calcul du volume d'excavation, et jusqu'à 3 remblais séquentiels — chacun avec son propre volume.</p>
+  </div>
+</div>
 
-<p>Précision LiDAR sur les appareils compatibles, interface bilingue français/anglais, unités métriques ou impériales au choix.</p>
+<h2 class="section-title">Capturez vite, capturez juste</h2>
+<p class="section-sub">Un sélecteur de forme en haut de l'écran choisit la méthode de capture la plus rapide pour chaque surface.</p>
+<div class="two-col">
+  <div>
+    <ul class="precision-list">
+      <li><strong>Rectangle</strong> — 2 mesures (largeur, longueur), angles droits automatiques.</li>
+      <li><strong>Rond</strong> — 1 mesure de diamètre.</li>
+      <li><strong>Demi-lune</strong> — une corde et un point de rayon.</li>
+      <li><strong>Traçage complet</strong> — pour toute forme irrégulière, polygone à angles variés.</li>
+    </ul>
+  </div>
+  <div>
+    <ul class="precision-list">
+      <li><strong>Équerrage de coin</strong> — un bouton bleu ajuste un angle proche de 90°/180° à sa valeur exacte, sans jamais toucher un point déjà confirmé.</li>
+      <li><strong>Validation automatique</strong> — un point capturé passe du rouge au vert tout seul, prêt pour le suivant.</li>
+      <li><strong>Double étiquette de dimension</strong> — métrique au-dessus, pieds-pouces-fraction en dessous de chaque ligne, comme un galon à mesurer physique.</li>
+    </ul>
+  </div>
+</div>
 
-<p>© 2026 JDG-inc. Tous droits réservés.</p>
+<h2 class="section-title">Précision pensée pour le chantier</h2>
+<div class="grid">
+  <div class="card">
+    <span class="icon">📡</span>
+    <h3>Préférence LiDAR</h3>
+    <p>Sur les appareils compatibles, chaque point capturé priorise un hit sur le maillage LiDAR plutôt qu'un plan estimé, pour plus de précision.</p>
+  </div>
+  <div class="card">
+    <span class="icon">🎯</span>
+    <h3>Position moyennée et figée</h3>
+    <p>Chaque point est calculé une seule fois à partir de plusieurs échantillons, accroché au plan réel, puis ne bouge plus jamais — aucune dérive au fil du relevé.</p>
+  </div>
+  <div class="card">
+    <span class="icon">🔋</span>
+    <h3>Optimisé pour ne pas chauffer</h3>
+    <p>Le rendu AR ralentit automatiquement dès que la visée est immobile, pour un appareil qui reste frais pendant un long relevé.</p>
+  </div>
+</div>
+
+<h2 class="section-title">Vos relevés, prêts à partager</h2>
+<p class="section-sub">Chaque surface capturée s'affiche en vue en plan calibrée — pincer pour zoomer, glisser pour déplacer — identique à l'écran et à l'export.</p>
+<div class="export-badges">
+  <span class="badge">Export image (PNG)</span>
+  <span class="badge">Export vectoriel (.dxf)</span>
+  <span class="badge">Tableau PDF pleine page</span>
+</div>
+<p style="margin-top:16px;">
+  Le résumé complet du relevé — toutes les surfaces, superficies, périmètres et volumes — s'exporte en un
+  tableau PDF lisible et bien mis en page, prêt à imprimer ou à envoyer à un client ou un fournisseur.
+  Le fichier .dxf s'ouvre nativement dans les logiciels de CAO (AutoCAD et équivalents).
+</p>
+
+<h2 class="section-title">Fait pour tous les chantiers</h2>
+<div class="grid">
+  <div class="card">
+    <span class="icon">🌐</span>
+    <h3>Bilingue</h3>
+    <p>Interface complète en français et en anglais, basculable en tout temps.</p>
+  </div>
+  <div class="card">
+    <span class="icon">📐</span>
+    <h3>Métrique ou impérial</h3>
+    <p>Millimètres/mètres ou pieds-pouces-fraction au 1/16 po — selon vos habitudes.</p>
+  </div>
+  <div class="card">
+    <span class="icon">🔒</span>
+    <h3>100% local, aucune donnée collectée</h3>
+    <p>Aucun compte, aucun serveur, aucun suivi. Vos relevés restent sur votre appareil.</p>
+  </div>
+</div>
+
+<section style="text-align:center; margin-top:64px;">
+  <a class="cta" href="https://apps.apple.com/app/site-dim/id6807966608">Télécharger SITE DIM sur l'App Store</a>
+</section>
+
+<footer>
+  <p>SITE DIM est développé par JDG Entrepreneur Général Inc.</p>
+  <p><a href="support.html">Support</a> · <a href="confidentialite.html">Politique de confidentialité</a> · <a href="en.html">English</a></p>
+  <p>© 2026 JDG-inc. Tous droits réservés.</p>
+</footer>
+
 </body>
 </html>

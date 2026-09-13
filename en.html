@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="SITE DIM turns your iPhone into an augmented-reality construction takeoff tool: walls, floors, ceilings, roofs, trim and terrain — with automatic area and volume calculations.">
+<title>SITE DIM — Augmented Reality Quantity Takeoff</title>
+<style>
+  :root {
+    --navy: #14203a;
+    --orange: #f97316;
+    --bg: #fff;
+    --muted: #5b6478;
+    --card-bg: #f7f8fb;
+    --border: #e6e8ee;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 0 20px 60px;
+    line-height: 1.6;
+    color: var(--navy);
+    background: var(--bg);
+  }
+  header.top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border);
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 1.2em; }
+  .brand .ruler { display: inline-block; width: 26px; height: 14px; border: 2px solid var(--orange); border-radius: 4px; position: relative; }
+  nav.top-nav a { color: var(--muted); text-decoration: none; font-weight: 600; margin-left: 18px; font-size: 0.95em; }
+  nav.top-nav a:hover { color: var(--orange); }
+  .lang-switch a { color: var(--orange); font-weight: 700; }
+
+  .hero { padding: 56px 0 40px; text-align: center; }
+  .hero h1 { font-size: 2.4em; margin-bottom: 8px; letter-spacing: -0.5px; }
+  .hero .slogan { color: var(--muted); font-size: 1.2em; margin-bottom: 28px; }
+  .hero p.lead { max-width: 620px; margin: 0 auto 32px; font-size: 1.08em; }
+  .cta {
+    display: inline-block;
+    background: var(--orange);
+    color: #fff;
+    font-weight: 700;
+    text-decoration: none;
+    padding: 14px 28px;
+    border-radius: 10px;
+    font-size: 1.05em;
+  }
+  .cta:hover { opacity: 0.92; }
+
+  h2.section-title { font-size: 1.6em; margin-top: 64px; margin-bottom: 8px; }
+  p.section-sub { color: var(--muted); margin-top: 0; margin-bottom: 28px; }
+
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px;
+  }
+  .card .icon { font-size: 1.6em; margin-bottom: 8px; display: block; }
+  .card h3 { margin: 0 0 6px; font-size: 1.05em; }
+  .card p { margin: 0; color: var(--muted); font-size: 0.95em; }
+
+  .precision-list { padding-left: 20px; }
+  .precision-list li { margin-bottom: 10px; }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
+  @media (max-width: 640px) { .two-col { grid-template-columns: 1fr; } }
+
+  .export-badges { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 12px; }
+  .badge {
+    background: var(--navy);
+    color: #fff;
+    font-size: 0.85em;
+    font-weight: 700;
+    padding: 5px 12px;
+    border-radius: 999px;
+  }
+
+  footer { margin-top: 72px; padding-top: 24px; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.9em; }
+  footer a { color: var(--orange); text-decoration: none; font-weight: 600; }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="brand"><span class="ruler"></span> SITE DIM</div>
+  <nav class="top-nav">
+    <a href="support.html">Support</a>
+    <a href="confidentialite.html">Privacy Policy</a>
+    <span class="lang-switch"><a href="index.html">Français</a></span>
+  </nav>
+</header>
+
+<section class="hero">
+  <h1>SITE DIM</h1>
+  <p class="slogan">Measure. Calculate. Build.</p>
+  <p class="lead">
+    SITE DIM turns your iPhone into a construction takeoff tool. Aim, tap, and the app traces the
+    outline in augmented reality, closes the shape, and calculates area, perimeter and volume
+    automatically — no more tape measure, no more manual math on site.
+  </p>
+  <a class="cta" href="https://apps.apple.com/app/site-dim/id6807966608">Download on the App Store</a>
+</section>
+
+<h2 class="section-title">Six survey types, one tool</h2>
+<p class="section-sub">Every surface type has its own capture flow, built around how it's actually measured on site.</p>
+<div class="grid">
+  <div class="card">
+    <span class="icon">🧱</span>
+    <h3>Walls</h3>
+    <p>Trace a wall's outline and subtract doors and windows directly — net area is calculated automatically.</p>
+  </div>
+  <div class="card">
+    <span class="icon">⬇️</span>
+    <h3>Floors</h3>
+    <p>Same tracing and net-area calculation, applied to floor surveys.</p>
+  </div>
+  <div class="card">
+    <span class="icon">⬆️</span>
+    <h3>Ceilings</h3>
+    <p>Aim upward — the app adapts automatically to the surface's orientation.</p>
+  </div>
+  <div class="card">
+    <span class="icon">🔺</span>
+    <h3>Roofs</h3>
+    <p>Measure slope and façade separately, across multiple segments if a panel is interrupted (a dormer, etc.) — area = total slope × total façade, never an auto-calculated pitch.</p>
+  </div>
+  <div class="card">
+    <span class="icon">📏</span>
+    <h3>Linear</h3>
+    <p>Trim, baseboards, and any point-to-point length — a direct, single measurement.</p>
+  </div>
+  <div class="card">
+    <span class="icon">⛰️</span>
+    <h3>Terrain</h3>
+    <p>Full topographic survey with triangulation, excavation volume calculation, and up to 3 sequential fill layers — each with its own volume.</p>
+  </div>
+</div>
+
+<h2 class="section-title">Capture fast, capture right</h2>
+<p class="section-sub">A shape selector at the top of the screen picks the fastest capture method for each surface.</p>
+<div class="two-col">
+  <div>
+    <ul class="precision-list">
+      <li><strong>Rectangle</strong> — 2 measurements (width, length), automatic right angles.</li>
+      <li><strong>Circle</strong> — a single diameter measurement.</li>
+      <li><strong>Half-moon</strong> — a chord plus one radius point.</li>
+      <li><strong>Full trace</strong> — for any irregular shape, a polygon with variable angles.</li>
+    </ul>
+  </div>
+  <div>
+    <ul class="precision-list">
+      <li><strong>Corner squaring</strong> — a blue button snaps an angle near 90°/180° to its exact value, without ever moving an already-confirmed point.</li>
+      <li><strong>Automatic point validation</strong> — a captured point turns from red to green on its own, ready for the next one.</li>
+      <li><strong>Dual dimension labels</strong> — metric above, feet-inches-fraction below every line, just like a physical tape measure.</li>
+    </ul>
+  </div>
+</div>
+
+<h2 class="section-title">Precision built for the job site</h2>
+<div class="grid">
+  <div class="card">
+    <span class="icon">📡</span>
+    <h3>LiDAR preference</h3>
+    <p>On compatible devices, every captured point favors a hit on the LiDAR mesh over an estimated plane, for higher accuracy.</p>
+  </div>
+  <div class="card">
+    <span class="icon">🎯</span>
+    <h3>Averaged, locked position</h3>
+    <p>Each point is computed once from several samples, snapped to the real surface, then never moves again — no drift over the course of a survey.</p>
+  </div>
+  <div class="card">
+    <span class="icon">🔋</span>
+    <h3>Built to stay cool</h3>
+    <p>AR rendering automatically slows down whenever the aim is still, keeping your device cool during a long survey.</p>
+  </div>
+</div>
+
+<h2 class="section-title">Your surveys, ready to share</h2>
+<p class="section-sub">Every captured surface shows a calibrated plan view — pinch to zoom, drag to pan — identical on screen and in every export.</p>
+<div class="export-badges">
+  <span class="badge">Image export (PNG)</span>
+  <span class="badge">Vector export (.dxf)</span>
+  <span class="badge">Full-page PDF table</span>
+</div>
+<p style="margin-top:16px;">
+  The full survey summary — every surface, area, perimeter and volume — exports as a clean, properly
+  laid-out PDF table, ready to print or send to a client or supplier. The .dxf file opens natively in
+  CAD software (AutoCAD and equivalents).
+</p>
+
+<h2 class="section-title">Built for every job site</h2>
+<div class="grid">
+  <div class="card">
+    <span class="icon">🌐</span>
+    <h3>Bilingual</h3>
+    <p>Full interface in English and French, switchable at any time.</p>
+  </div>
+  <div class="card">
+    <span class="icon">📐</span>
+    <h3>Metric or imperial</h3>
+    <p>Millimeters/meters or feet-inches-fraction down to 1/16" — whichever you're used to.</p>
+  </div>
+  <div class="card">
+    <span class="icon">🔒</span>
+    <h3>100% on-device, zero data collected</h3>
+    <p>No account, no server, no tracking. Your surveys stay on your device.</p>
+  </div>
+</div>
+
+<section style="text-align:center; margin-top:64px;">
+  <a class="cta" href="https://apps.apple.com/app/site-dim/id6807966608">Download SITE DIM on the App Store</a>
+</section>
+
+<footer>
+  <p>SITE DIM is developed by JDG Entrepreneur Général Inc.</p>
+  <p><a href="support.html">Support</a> · <a href="confidentialite.html">Privacy Policy</a> · <a href="index.html">Français</a></p>
+  <p>© 2026 JDG-inc. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
